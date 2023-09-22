@@ -23,6 +23,9 @@ export class TodoListComponent {
     },
   ];
 
+  searchTerm: string = ''; // Propiedad para almacenar el término de búsqueda
+
+
   addTask() {
     const task = {
       title: this.newTask,
@@ -53,5 +56,20 @@ export class TodoListComponent {
   stopEdit(task: any, title: string): void {
     this.editableId = null;
     this.updateTask(task, title);
+  }
+
+  onSearchChange() {
+    // No necesitas hacer nada aquí, la búsqueda se realizará al hacer clic en el botón
+  }
+
+  // Función para filtrar la lista de tareas en función del término de búsqueda
+  filterTasks(): any[] {
+    if (!this.searchTerm) {
+      return this.tasks;
+    }
+  
+    return this.tasks.filter((task) =>
+      task.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }
